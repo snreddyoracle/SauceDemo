@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="GEC-Regression" verbose="1" parallel="classes" thread-count="2">
+    <!--OATH Parameters[MANDATORY]-->
+
+    <test name="regression" >
+        <classes>
+            <class name="com.sauce.assignment.SauceDemo"/>
+        </classes>
+    </test>
+</suite>
