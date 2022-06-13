@@ -8,11 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.File;
 
-
 public class WebDriverFactory {
-
     private final static Logger logger = Logger.getLogger(WebDriverFactory.class);
-
     private final static File rootDriversDir = new File("src/main/resources/drivers");
 
     public enum BrowserName {
@@ -23,12 +20,13 @@ public class WebDriverFactory {
         WebDriver driver = null;
         if (name == BrowserName.CHROME) {
             driver = getChromeDriver();
-        }else {
+        } else {
             throw new InvalidArgumentException("Invalid browser option");
         }
         driver.manage().window().maximize();
         return driver;
     }
+
     public static Logger getLogger() {
         return logger;
     }
@@ -40,14 +38,14 @@ public class WebDriverFactory {
         logger.debug("Drivers root directory: " + rootDriversDir.toString());
         if (os.toLowerCase().contains("windows")) {
             osDriversDir = new File(rootDriversDir, "windows");
-        }
-        else{
+        } else if (os.toLowerCase().contains("mac")) {
+            osDriversDir = new File(rootDriversDir, "mac");
+        } else {
             throw new InvalidArgumentException("Invalid operating system: " + os);
         }
         logger.debug("OS drivers directory: " + osDriversDir.toString());
         return osDriversDir;
     }
-
 
     private static WebDriver getChromeDriver() {
         logger.debug("Get chrome driver..");
