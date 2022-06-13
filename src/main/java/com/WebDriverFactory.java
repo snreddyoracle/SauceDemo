@@ -49,7 +49,13 @@ public class WebDriverFactory {
 
     private static WebDriver getChromeDriver() {
         logger.debug("Get chrome driver..");
+        String os = System.getProperty("os.name");
         File driversDir = getDriversPath();
+        if (os.toLowerCase().contains("windows")) {
+            File chromeFile = new File(driversDir, "chromedriver.exe");
+        } else if (os.toLowerCase().contains("mac")) {
+            File chromeFile = new File(driversDir, "chromedriver");
+        }
         File chromeFile = new File(driversDir, "chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", chromeFile.getPath());
         return new ChromeDriver();
