@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Properties;
+
 public class LoginPage extends BasePage {
     @FindBy(id = "user-name")
     WebElement user_name;
@@ -21,9 +23,10 @@ public class LoginPage extends BasePage {
 
     /**
      * Open the given URL
+     * @param testData
      */
-    public void open() {
-        driver.get("https://www.saucedemo.com/");
+    public void open(Properties testData) {
+        driver.get(testData.getProperty("url"));
     }
 
     /**
@@ -35,15 +38,14 @@ public class LoginPage extends BasePage {
     }
 
     /**
-     * @param userName
-     * @param password
+     * @param testData
      * @return ProductsPage after login
      */
-    public ProductsPage login(String userName, String password) {
+    public ProductsPage login(Properties testData) {
         user_name.clear();
-        user_name.sendKeys(userName);
+        user_name.sendKeys(testData.getProperty("userName"));
         passwordPath.clear();
-        passwordPath.sendKeys(password);
+        passwordPath.sendKeys(testData.getProperty("password"));
         login_button.click();
         return new ProductsPage(this.driver);
     }

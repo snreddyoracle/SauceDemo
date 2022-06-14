@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Properties;
+
 public class YourInformationPage extends BasePage {
     @FindBy(xpath = "//div[@id = 'shopping_cart_container']")
     WebElement cartLinkLocator;
@@ -33,11 +35,12 @@ public class YourInformationPage extends BasePage {
 
     /**
      * @return Overview page after fill after personal details.
+     * @param testData
      */
-    public Overview fillPersonalInformation() {
-        firstNameLocator.sendKeys("First Name");
-        lastNameLocator.sendKeys("Last Name");
-        zipCodeLocator.sendKeys("500072");
+    public Overview fillPersonalInformation(Properties testData) {
+        firstNameLocator.sendKeys(testData.getProperty("firstName"));
+        lastNameLocator.sendKeys(testData.getProperty("lastName"));
+        zipCodeLocator.sendKeys(testData.getProperty("zipCode"));
         continueLocator.click();
         return new Overview(this.driver);
     }

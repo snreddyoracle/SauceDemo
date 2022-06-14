@@ -7,6 +7,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Properties;
+
 public class ProductsPage extends BasePage {
 
     double totalItemPrice = 0;
@@ -26,11 +28,12 @@ public class ProductsPage extends BasePage {
     }
 
     /**
-     * @param NumberOfItemsToAdd
+     * @param testData
      * @return ProductsPage after adding products
      */
-    public ProductsPage addToCart(int NumberOfItemsToAdd) {
-        for (int i = 1; i <= NumberOfItemsToAdd; i++) {
+    public ProductsPage addToCart(Properties testData) {
+        int numberOfProductsToAdd = Integer.parseInt(testData.getProperty("numberOfProductsToAdd"));
+        for (int i = 1; i <= numberOfProductsToAdd; i++) {
             addtoCartLocator = driver.findElement(By.xpath(String.format(addtoCart, i)));
             addtoCartLocator.click();
             itemPriceLocator = driver.findElement(By.xpath(String.format(itemPrice, i)));

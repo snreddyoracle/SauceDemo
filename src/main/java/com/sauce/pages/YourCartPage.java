@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
+import java.util.Properties;
 
 public class YourCartPage<itemCount> extends BasePage {
 
@@ -42,9 +43,10 @@ public class YourCartPage<itemCount> extends BasePage {
     }
 
     /**
-     * @param NumberOfItemsToRemove
+     * @param testData
      */
-    public void remove(int NumberOfItemsToRemove) {
+    public void remove(Properties testData) {
+        int NumberOfItemsToRemove = Integer.parseInt(testData.getProperty("numberOfProductsToRemove"));
         for (int i = 1; i <= NumberOfItemsToRemove; i++) {
             itemPriceLocator = driver.findElement(By.xpath(String.format(itemPrice, i)));
             this.totalItemPrice = totalItemPrice + Double.parseDouble(itemPriceLocator.getText().substring(1));

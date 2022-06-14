@@ -5,7 +5,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
-import com.utils.Utilty;
+import com.utils.Utils;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
@@ -14,6 +14,8 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import com.sauce.pages.*;
+
+import java.util.Properties;
 
 public class BaseTestcase {
     protected LoginPage loginPage;
@@ -26,12 +28,18 @@ public class BaseTestcase {
     public final static Logger logger = WebDriverFactory.getLogger();
     protected ExtentReports extent;
     protected ExtentTest report;
+    protected Properties testData;
+
 
     @BeforeSuite
-    public void results() {
+    public void results() throws Exception {
         ExtentSparkReporter htmlReporter = new ExtentSparkReporter("SauceDemoTestResult.html");
         extent = new ExtentReports();
         extent.attachReporter(htmlReporter);
+        testData = Utils.getTestData();
+
+
+
     }
 
     @BeforeMethod
@@ -43,7 +51,7 @@ public class BaseTestcase {
     @AfterMethod
     public void teardown(ITestResult result) throws Exception {
         if (ITestResult.FAILURE == result.getStatus()) {
-            String temp = Utilty.takeSnapShot(driver, result.getName());
+            String temp = Utils.takeSnapShot(driver, result.getName());
             report.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
         }
 

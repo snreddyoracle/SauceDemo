@@ -6,8 +6,10 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
 import java.io.File;
+import java.io.FileReader;
+import java.util.Properties;
 
-public class Utilty {
+public class Utils {
     public static String takeSnapShot(WebDriver driver, String fileName) throws Exception {
         String fileWithPath = "./Scrennshots/" + fileName + ".png";
         TakesScreenshot scrShot = ((TakesScreenshot) driver);
@@ -16,5 +18,12 @@ public class Utilty {
         FileUtils.copyFile(SrcFile, DestFile);
 
         return fileWithPath;
+    }
+    public static Properties getTestData() throws Exception {
+        FileReader reader=new FileReader("src/main/resources/db.properties");
+
+        Properties prop=new Properties();
+        prop.load(reader);
+        return prop;
     }
 }
