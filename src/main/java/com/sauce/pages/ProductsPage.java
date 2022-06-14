@@ -29,7 +29,7 @@ public class ProductsPage extends BasePage {
     }
 
     public ProductsPage waitUntilLoaded() {
-        wait.until(ExpectedConditions.visibilityOf(cartLinkLocator));
+        wait.until(ExpectedConditions.visibilityOf(openMenu));
         return this;
     }
 

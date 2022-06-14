@@ -32,7 +32,7 @@ public class SauceDemo extends BaseTestcase {
 
         ProductsPage productsPage = loginPage.login("standard_user", "secret_sauce");
         productsPage.waitUntilLoaded();
-        report.info("Login Successfully");
+        report.pass("Login Successfully");
         productsPage.addToCart(2);
         report.info("products added to the cart Successfully");
 
@@ -48,24 +48,24 @@ public class SauceDemo extends BaseTestcase {
         Overview overviewPage = yourInformationPage.fillPersonalInformation();
         report.info("Fill the personal details successfully");
         Assert.assertEquals(yourCartPage.getTotalItemPrice(), overviewPage.getSubTotal(),"Calculated total price is mismatch with subtotal ");
-        report.info("Before removing: Calculated total price is equals subtotal");
+        report.pass("Before removing: Calculated total price is equals subtotal");
 
         overviewPage.goToYourCartPage();
         yourCartPage.waitUntilLoaded();
         yourCartPage.remove(1);
-        report.info("Removed gine number of items successfully");
+        report.info("Removed given number of items successfully");
         yourCartPage.calculateTotalItemPrice();
-        report.info("After removing: otal item price calculated successfully");
+        report.info("After removing: Total item price calculated successfully");
         yourCartPage.checkOut();
 
         yourInformationPage.fillPersonalInformation();
         Assert.assertEquals(yourCartPage.getTotalItemPrice(), overviewPage.getSubTotal(),"Calculated total price is mismatch with subtotal ");
-        report.info("After removing: Calculated total price is equals subtotal");
+        report.pass("After removing: Calculated total price is equals subtotal");
 
         CompletePage completePage = overviewPage.finish();
         report.info("Finish shopping successfully");
         completePage.waitForSuccessMessage();
         completePage.logout();
-        report.info("Logout successfully");
+        report.pass("Logout successfully");
     }
 }
