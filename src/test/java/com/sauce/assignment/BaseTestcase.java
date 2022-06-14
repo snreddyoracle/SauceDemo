@@ -13,8 +13,15 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import com.sauce.pages.*;
 
 public class BaseTestcase {
+    protected LoginPage loginPage;
+    protected ProductsPage productsPage;
+    protected YourCartPage yourCartPage;
+    protected YourInformationPage yourInformationPage;
+    protected Overview overviewPage;
+    protected CompletePage completePage;
     protected WebDriver driver;
     public final static Logger logger = WebDriverFactory.getLogger();
     protected ExtentReports extent;
@@ -30,6 +37,7 @@ public class BaseTestcase {
     @BeforeMethod
     public void setup(ITestResult result) {
         this.driver = WebDriverFactory.getDriver(WebDriverFactory.BrowserName.CHROME);
+        this.loginPage = new LoginPage(this.driver);
     }
 
     @AfterMethod
