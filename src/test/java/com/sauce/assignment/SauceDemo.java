@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 public class SauceDemo extends BaseTestcase {
     @Test
     public void Login() throws InterruptedException {
-        ExtentTest report = extent.createTest("LoginTest");
+        report = extent.createTest("LoginTest");
         logger.info("Testcases Started");
         LoginPage loginPage = new LoginPage(this.driver);
         loginPage.open();

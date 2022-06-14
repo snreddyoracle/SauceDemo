@@ -2,6 +2,8 @@ package com.sauce.assignment;
 
 import com.WebDriverFactory;
 import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.utils.Utilty;
 import org.apache.log4j.Logger;
@@ -16,6 +18,7 @@ public class BaseTestcase {
     protected WebDriver driver;
     public final static Logger logger = WebDriverFactory.getLogger();
     protected ExtentReports extent;
+    protected ExtentTest report;
 
     @BeforeSuite
     public void results() {
@@ -32,8 +35,10 @@ public class BaseTestcase {
     @AfterMethod
     public void teardown(ITestResult result) throws Exception {
         if (ITestResult.FAILURE == result.getStatus()) {
-            Utilty.takeSnapShot(driver, result.getName());
+            String temp = Utilty.takeSnapShot(driver, result.getName());
+            report.fail(result.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(temp).build());
         }
+
         driver.quit();
     }
 
