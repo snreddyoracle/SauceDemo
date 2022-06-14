@@ -7,7 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class YourInformationPage extends BasePage {
-
     @FindBy(xpath = "//div[@id = 'shopping_cart_container']")
     WebElement cartLinkLocator;
     @FindBy(id = "first-name")
@@ -19,24 +18,25 @@ public class YourInformationPage extends BasePage {
     @FindBy(id = "continue")
     WebElement continueLocator;
 
-    // constructor method
     public YourInformationPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public void open() {
-        driver.get("https://www.saucedemo.com/");
-    }
-
-    public YourInformationPage waitUntilLoaded() throws InterruptedException {
+    /**
+     * @return YourInformationPage after page load successfully.
+     */
+    public YourInformationPage waitUntilLoaded() {
         wait.until(ExpectedConditions.visibilityOf(firstNameLocator));
         return this;
     }
 
+    /**
+     * @return Overview page after fill after personal details.
+     */
     public Overview fillPersonalInformation() {
-        firstNameLocator.sendKeys("aaaaa");
-        lastNameLocator.sendKeys("bbbbb");
+        firstNameLocator.sendKeys("First Name");
+        lastNameLocator.sendKeys("Last Name");
         zipCodeLocator.sendKeys("500072");
         continueLocator.click();
         return new Overview(this.driver);

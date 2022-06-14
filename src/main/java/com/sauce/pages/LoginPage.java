@@ -14,21 +14,31 @@ public class LoginPage extends BasePage {
     @FindBy(id = "login-button")
     WebElement login_button;
 
-    // constructor method
     public LoginPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
     }
 
+    /**
+     * Open the given URL
+     */
     public void open() {
         driver.get("https://www.saucedemo.com/");
     }
 
-    public LoginPage waitUntilLoaded() throws InterruptedException {
+    /**
+     * @return LoginPage after page load successfully
+     */
+    public LoginPage waitUntilLoaded() {
         wait.until(ExpectedConditions.visibilityOf(user_name));
         return this;
     }
 
+    /**
+     * @param userName
+     * @param password
+     * @return ProductsPage after login
+     */
     public ProductsPage login(String userName, String password) {
         user_name.clear();
         user_name.sendKeys(userName);

@@ -16,9 +16,13 @@ public class WebDriverFactory {
         CHROME
     }
 
-    public static WebDriver getDriver(BrowserName name) {
+    /**
+     * @param browserName
+     * @return WebDriver for given browser
+     */
+    public static WebDriver getDriver(BrowserName browserName) {
         WebDriver driver = null;
-        if (name == BrowserName.CHROME) {
+        if (browserName == BrowserName.CHROME) {
             driver = getChromeDriver();
         } else {
             throw new InvalidArgumentException("Invalid browser option");
@@ -27,10 +31,17 @@ public class WebDriverFactory {
         return driver;
     }
 
+    /**
+     * @return Log4j object
+     */
     public static Logger getLogger() {
+
         return logger;
     }
 
+    /**
+     * @return  Driver file path
+     */
     private static File getDriversPath() {
         String os = System.getProperty("os.name");
         File osDriversDir = null;

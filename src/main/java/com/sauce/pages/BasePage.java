@@ -26,12 +26,18 @@ public class BasePage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+    /**
+     * @return YourCartPage
+     */
     public YourCartPage goToYourCartPage() {
         cartLinkLocator.click();
         return new YourCartPage(this.driver);
     }
 
-    public LoginPage logout() throws InterruptedException {
+    /**
+     * @return YourCartPage
+     */
+    public LoginPage logout(){
         openMenu.click();
         wait.until(ExpectedConditions.visibilityOf(logOut));
         logOut.click();

@@ -6,8 +6,8 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class SauceDemo extends BaseTestcase {
-    @Test
-    public void Login() throws InterruptedException {
+    @Test(alwaysRun = true)
+    public void Login() {
         report = extent.createTest("LoginTest");
         logger.info("Testcases Started");
         LoginPage loginPage = new LoginPage(this.driver);
@@ -22,7 +22,7 @@ public class SauceDemo extends BaseTestcase {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = {"Login"}, alwaysRun = true)
     public void shopping() throws InterruptedException {
         ExtentTest report = extent.createTest("ShoppingTest");
         LoginPage loginPage = new LoginPage(this.driver);
